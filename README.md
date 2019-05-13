@@ -4,3 +4,4 @@ The entire repo for the project
 - php7
 - apache2
 - [OBD-II Library](https://github.com/stanleyhuangyc/ArduinoOBD)
+- [NewSoftSerial](arduiniana.org/libraries/newsoftserial/)
