@@ -8,9 +8,22 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
-	<header>
+	<header>-->
 		<?php
-		try
+		$manager = new MongoDB\Driver\Manager("mongodb://localhost:27017");
+
+		$filter = ['id' => ['$gt' => 0]]
+		$options = [
+			'projection' => ['_id' => 0],
+		 ];
+		$query = new MongoDB\Driver\Query($filter,$options);
+		$cursor = $manager->executeQuery('db.smartcar', $query);
+
+		foreach($cursor as $document)
+		{
+			var_dump($document);
+		}
+		/*try
 		{
 			//new DB connection
 			$m = new Mongo('localhost');
@@ -51,9 +64,9 @@
 		{
 			//if there is error and catching
 			echo $e->getMessage();
-		}			
+		}*/	
 		?>
-		<nav class="navbar navbar-expand navbar-dark bg-dark sticky-top">
+		<!--<nav class="navbar navbar-expand navbar-dark bg-dark sticky-top">
 		<a href="index.php" class="navbar-brand">IoT Personal Assignment</a>
 		</nav>
 	</header>
