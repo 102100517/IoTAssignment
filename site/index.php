@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>IoT Personal Assignment</title>
@@ -10,13 +10,48 @@
 <body>
 	<header>
 		<?php
-			$m = new MongoCient();
-			$db = $m->selectDB("mydb");
-			$collection = $db->selectCollection("smartcar");
-
+		try
+		{
+			//new DB connection
+			$m = new Mongo('localhost');
+			//connect to database
+			$db = $m->mydb;
+			//a new smartcar collection obj
+			$collection = $db->smartcar
+			//fetch all the products
 			$cursor = $collection->find();
 
-			echo $cursor->info();
+			//how many results
+			$num_docs = $cursor->count();
+
+			if($num_docs > 0)
+			{
+				//loop over all the elements
+				foreach($cursor as $obj)
+				{
+					echo 'Action: ' . $obj['Action'] . "\n";
+					echo 'RPM: ' . $obj['RPM'] . "\n";
+					echo 'Engine Load' . $obj['Engine Load'] . "\n";
+					echo "\n";
+				}
+			}
+			else
+			{
+				//if no products are found, we show this message
+				echo "No entries found \n";
+			}
+			$m->close();
+		}
+		catch(MongoConnectionException $e)
+		{
+			//if there is error and catching
+			echo $e->getMessage();
+		}
+		catch(MongoException $e)
+		{
+			//if there is error and catching
+			echo $e->getMessage();
+		}			
 		?>
 		<nav class="navbar navbar-expand navbar-dark bg-dark sticky-top">
 		<a href="index.php" class="navbar-brand">IoT Personal Assignment</a>
@@ -36,4 +71,4 @@
 		</div>
 	</main>
 </body>
-</html>
+</html> -->
