@@ -9,6 +9,16 @@
 </head>
 <body>
 	<header>
+		<?php
+			$m = new MongoCient();
+			$db = $m->selectDB("mydb");
+			$collection = $db->selectCollection("smartcar");
+
+			$cursor = $collection->find();
+			$cursor->getNext();
+			
+			echo "Reading from: ", $cursor->info()["server"], "\n";
+		?>
 		<nav class="navbar navbar-expand navbar-dark bg-dark sticky-top">
 		<a href="index.php" class="navbar-brand">IoT Personal Assignment</a>
 		</nav>

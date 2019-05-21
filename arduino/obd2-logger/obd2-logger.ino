@@ -3,7 +3,7 @@
 #include <RTClib.h>
 
 int ledpin=13;
-const int capacity = JSON_OBJECT_SIZE(2);
+const int capacity = JSON_OBJECT_SIZE(3);
 StaticJsonDocument<capacity> doc;
 COBD obd;
 int RPMspeed = 0;
