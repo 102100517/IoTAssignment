@@ -22,9 +22,9 @@ void setup() {
   obd.begin();
   // initialize OBD-II adapter
   do {
-    Serial.println("Connecting..");
+    //Serial.println("Connecting..");
   } while (!obd.init());
-  Serial.println("OBD connected");
+  //Serial.println("OBD connected");
   //RTC.begin();
   delay(5000);
 }
@@ -47,5 +47,5 @@ void loop() {
   //Serial.println("V");
   doc["Voltage"].set(VehicleVoltage);
   JsonObject obj = doc.to<JsonObject>();
-  //serializeJsonPretty(doc,Serial);
+  serializeJsonPretty(doc,Serial);
 }
