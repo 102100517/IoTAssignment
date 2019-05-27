@@ -4,16 +4,16 @@ import pymongo
 
 def main():
     try:
-        arduino = serial.Serial('/dev/ttyACM0',115200)
+        arduino = serial.Serial(port='/dev/ttyACM1',baudrate='115200')
         print('[*]arduino connected')
     except:
         print('[!]arduino not found, exit')
         return
 
     try:
-        client = pymongo.MongoClient()
-        db = client.mydb
-        collection = db.smartcar
+        client = pymongo.MongoClient("mongodb://localhost:27017")
+        #db = client.mydb
+        collection = client['mydb']['smartcar']
         print('[*]mongodb connected')
     except:
         print('[!]mongodb not found, cant connect')
@@ -21,12 +21,12 @@ def main():
     
     while True:
         try:
+
             info = json.loads(arduino.readline())
-            collection.update_one({},{ "$set" : { "OilTemp" : serialInfo['OilTemp'], 'Engine load': serialInfo['Engine Load'], 'RPM' : serialInfo['RPM'], 'Voltage': serialInfo['Voltage']}})
+            collection.update({"car" : "golf"}, {'$set' : {'OilTemp' : info['oil'],'EngineLoad' : info['engine'], 'RPM' : info['rpm'], 'Voltage' : info['volt']}})
             print(collection.find_one())
         except(json.decoder.JSONDecodeError, UnicodeDecodeError):
             print('[!]can\'t parse json data will try next cycle')
-
 
 if __name__ == '__main__':
     main()
