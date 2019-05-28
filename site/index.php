@@ -8,14 +8,19 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
-	<?php	
-		$conn = new MongoClient("mongodb://localhost:27017");
-		$db = $conn->mydb;
-		$collection $db->smartcar;
+	<?php
+		require 'vendor/autoload.php';
+		$client = new MongoDB\Client("mongodb://localhost:27017");
+		$collection = $client->mydb->smartcar;
 
-		$document = $collection->findOne();
+		$result = $collection->find([ 'car' => 'golf'],[]);
 
-		var_dump($document);
+		foreach($result as $entry){
+			echo $entry['OilTemp'], "\n";
+			echo $entry['EngineLoad'], "\n";
+			echo $entry['RPM'], "\n";
+			echo $entry['Voltage'], "\n";
+		}
 	?>
 	<header>
 		<nav class="navbar navbar-expand navbar-dark bg-dark sticky-top">
