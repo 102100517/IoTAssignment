@@ -4,7 +4,7 @@ import pymongo
 
 def main():
     try:
-        arduino = serial.Serial(port='/dev/ttyACM1',baudrate='115200')
+        arduino = serial.Serial(port='/dev/ttyACM0',baudrate='115200')
         print('[*]arduino connected')
     except:
         print('[!]arduino not found, exit')
