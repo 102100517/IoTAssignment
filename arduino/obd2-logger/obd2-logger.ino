@@ -9,16 +9,13 @@ int OilTemp = 0;
 int EngineLoad = 0;
 int RPMspeed = 0;
 float VehicleVoltage = 0;
-//RTC_DS1307 RTC;
 
 void setup() {
-  // put your setup code here, to run once:
-  //pinMode(ledpin,OUTPUT);
   Serial.begin(115200);
   while(!Serial){
     ;
   }
-  /*obd.begin();
+  obd.begin();
   // initialize OBD-II adapter
   do {
     //Serial.println("Connecting..");
@@ -29,23 +26,15 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  //obd.readPID(PID_ENGINE_OIL_TEMP, OilTemp);
-  //Serial.print(OilTemp);
-  //Serial.println("C");
-  doc["oil"] = 86;
-  //obd.readPID(PID_ENGINE_LOAD, EngineLoad);
-  //Serial.print(EngineLoad);
-  //Serial.println("%");
-  doc["engine"] = 40;
-  //obd.readPID(PID_RPM,RPMspeed);
-  //Serial.println(RPMspeed);
-  doc["rpm"] = 4000;
-  //VehicleVoltage = obd.getVoltage();
-  //Serial.print(VehicleVoltage);
-  //Serial.println("V");
-  doc["volt"] = 13.7;
-  //JsonObject obj = doc.to<JsonObject>();
-  serializeJsonPretty(doc,Serial);
+  obd.readPID(PID_ENGINE_OIL_TEMP, OilTemp);
+  doc["oil"] = OilTemp;
+  obd.readPID(PID_ENGINE_LOAD, EngineLoad);
+  doc["engine"] = EngineLoad;
+  obd.readPID(PID_RPM,RPMspeed);
+  doc["rpm"] = RPMspeed;
+  VehicleVoltage = obd.getVoltage();
+  doc["volt"] = VehicleVoltage;
+  serializeJson(doc,Serial);
+  Serial.println("");
   delay(100);
 }
