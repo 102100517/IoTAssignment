@@ -1,5 +1,5 @@
 # IOT Personal Assignment
-The entire repo for the project
+For this IOT application, I wanted to create a proof of concept build which could represent a way to see your cars sensors at a quick glance at your phone or a website. The current proof of concept is just to prove comunication between the car a sensor device, a websever and a database.
 ## Current Dependacies
 - php7
 - apache2
